@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
 {
-    public function sales()
-    {
-        return view('sales.sales');
-    }
+    public function index()
+{
+    return view('sales.sales');
+}
+
 }

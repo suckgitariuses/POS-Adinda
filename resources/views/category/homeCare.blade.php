@@ -10,8 +10,10 @@
 <body>
     <h1>Home Care</h1>
     <ul>
-        <li>Mop</li>
         <li>Broom</li>
+        <li>Dish Sponge</li>
+        <li>Trash Bin</li>
+        <li>Vacuum Cleaner</li>
         <li>Air Freshener</li>
     </ul>
 </body>

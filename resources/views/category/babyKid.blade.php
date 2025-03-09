@@ -10,10 +10,10 @@
 <body>
     <h1>Baby & Kid</h1>
     <ul>
-        <li>Baby Oil</li>
-        <li>Diapers</li>
-        <li>Baby Shampoo</li>
         <li>Baby Soap</li>
+        <li>Baby Lotion</li>
+        <li>Baby oil</li>
+        <li>underpad</li>
     </ul>
 </body>
 

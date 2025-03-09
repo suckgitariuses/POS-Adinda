@@ -11,10 +11,11 @@
     <h1>Beauty & Health</h1>
     <ul>
         <li>Face Wash</li>
-        <li>Cream</li>
-        <li>Hair Conditioner</li>
-        <li>Liquid Soap</li>
-        <li>Shampoo</li>
+        <li>Sunscreen</li>
+        <li>Body Wash</li>
+        <li>Shampoo & Conditioner</li>
+        <li>Concealer</li>
+        <li>Perfume</li>
     </ul>
 </body>
 

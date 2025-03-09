@@ -10,15 +10,19 @@
 <body>
     <h1>Food</h1>
     <ul>
-        <li>Cake</li>
-        <li>Crackers</li>
-        <li>Choco chips</li>
+        <li>Brown Rice</li>
+        <li>Beef</li>
+        <li>Butter Cookies</li>
+        <li>Fried Chicken</li>
+        <li>Sandwich</li>
     </ul>
     <h1>Beverage</h1>
     <ul>
-        <li>Soft Drink</li>
-        <li>Soda</li>
-        <li>Juice</li>
+        <li>Mineral Water</li>
+        <li>Oat Milk</li>
+        <li>Esspresso</li>
+        <li>Vegetable Juice</li>
+        <li>Smoothie</li>
     </ul>
 </body>
 
