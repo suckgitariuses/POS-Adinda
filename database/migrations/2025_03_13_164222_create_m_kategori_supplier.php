@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // praktikum 2.1
         Schema::create('m_kategori_supplier', function (Blueprint $table) {
             $table->id('supplier_id')-> unique();
             $table->string('supplier_kode', 10);
