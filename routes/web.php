@@ -1,16 +1,31 @@
 <?php  
 
-use App\Http\Controllers\HomeController;  
-use App\Http\Controllers\PenjualanController;  
-use App\Http\Controllers\ProductController;  
-use App\Http\Controllers\UserController;  
+// use App\Http\Controllers\HomeController;  
+// use App\Http\Controllers\PenjualanController;  
+// use App\Http\Controllers\ProductController;  
+// use App\Http\Controllers\UserController;  
+
+use App\Http\Controllers\LevelController;
 use Illuminate\Support\Facades\Route;  
 
-Route::get('/', [HomeController::class, 'index'])->name('home'); // Rute untuk halaman home  
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/sales', [PenjualanController::class, 'sales'])->name('sales');  
+Route::get('/level', [LevelController::class, 'index']);
 
-Route::get('/categories', [ProductController::class, 'showCategories'])->name('categories');  
-Route::get('/category/{category}', [ProductController::class, 'showCategory'])->name('category.detail');  
 
-Route::get('/user/{id}/name/{name}', [UserController::class, 'user'])->name('user.profile');  
+// Route::get('/', [HomeController::class, 'index'])->name('home'); // Rute untuk halaman home  
+
+// Route::get('/sales', [PenjualanController::class, 'index'])->name('sales.index');
+// Route::get('/categories', [ProductController::class, 'showCategories']);
+
+// Route::get('/category/{category}', [ProductController::class, 'showCategory'])->name('category.detail');
+
+// Route::get('/category/food-beverage', [ProductController::class, 'showCategory'])->name('products.food-beverage');
+// Route::get('/category/beauty-health', [ProductController::class, 'showCategory'])->name('products.beauty-health');
+// Route::get('/category/home-care', [ProductController::class, 'showCategory'])->name('products.home-care');
+// Route::get('/category/baby-kid', [ProductController::class, 'showCategory'])->name('products.baby-kid');
+
+
+// Route::get('/user/{id}/name/{name}', [UserController::class, 'user'])->name('user.profile');  
