@@ -19,6 +19,6 @@
         <input type="number" id="level_id" name="level_id" placeholder="Masukkan ID Level">
         <br><br>
 
-        <input type="submit" class="btn btn-success" value="Simpan">
+        <input type="submit" class="btn btn-success" value="Simpan"> 
     </form>
 </body>
