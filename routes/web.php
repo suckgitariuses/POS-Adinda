@@ -5,6 +5,7 @@
 // use App\Http\Controllers\ProductController;  
 // use App\Http\Controllers\UserController;  
 
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
 use Illuminate\Support\Facades\Route;  
 
@@ -13,6 +14,7 @@ Route::get('/', function () {
 });
 
 Route::get('/level', [LevelController::class, 'index']);
+Route::get('/Kategori', [KategoriController::class, 'index']);
 
 
 // Route::get('/', [HomeController::class, 'index'])->name('home'); // Rute untuk halaman home  
