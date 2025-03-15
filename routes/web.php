@@ -13,10 +13,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/tambah', [UserController::class, 'tambah']);
-Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
+// Route::get('/user/tambah', [UserController::class, 'tambah']);
+// Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
 Route::get('/user/tambah', [UserController::class, 'tambah'])->name('user.tambah');
 Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan'])->name('user.tambah_simpan');
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
 
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/Kategori', [KategoriController::class, 'index']);
