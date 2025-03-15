@@ -10,6 +10,8 @@ class UserController extends Controller
 {
     public function index()
     {
+        $user = UserModel::find(1);
+        return view('user', ['data' => $user]);
         // // tambah data user dengan Eloquent model 
         // $data = [
         //     'username' => 'customer-1',
@@ -24,16 +26,16 @@ class UserController extends Controller
         // ];
         // UserModel::where('username', 'customer-1')->update($data);
 
-        $data = [
-            'level_id' => 2,
-            'username' => 'manager_tiga',
-            'nama' => 'Manager 3',
-            'password' => Hash::make('12345'),
-        ];
-        UserModel::create($data);
+        // $data = [
+        //     'level_id' => 2,
+        //     'username' => 'manager_tiga',
+        //     'nama' => 'Manager 3',
+        //     'password' => Hash::make('12345'),
+        // ];
+        // UserModel::create($data);
 
-        // mengakses model usermodel
-        $user = UserModel::all();
-        return view('user', ['data' => $user]);
+        // // mengakses model usermodel
+        // $user = UserModel::all();
+        // return view('user', ['data' => $user]);
     }
 }
