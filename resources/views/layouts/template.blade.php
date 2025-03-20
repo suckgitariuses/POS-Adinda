@@ -40,7 +40,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            @include('layouts.breadcumb')
+            @include('layouts.breadcrumb')
 
             <!-- Main content -->
             <section class="content">
