@@ -38,12 +38,16 @@ class UserController extends Controller
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('aksi', function ($user) {
-                return '<a href="' . url('/user/' . $user->user_id) . '" class="btn btn-info btn-sm">Detail</a> '
-                    . '<a href="' . url('/user/' . $user->user_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> '
-                    . '<form method="POST" action="' . url('/user/' . $user->user_id) . '" style="display:inline-block;">
-                    ' . csrf_field() . method_field('DELETE') . '
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\"Apakah Anda yakin menghapus data ini?\");">Hapus</button>
-                    </form>';
+                // return '<a href="' . url('/user/' . $user->user_id) . '" class="btn btn-info btn-sm">Detail</a> '
+                //     . '<a href="' . url('/user/' . $user->user_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> '
+                //     . '<form method="POST" action="' . url('/user/' . $user->user_id) . '" style="display:inline-block;">
+                //     ' . csrf_field() . method_field('DELETE') . '
+                //     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\"Apakah Anda yakin menghapus data ini?\");">Hapus</button>
+                //     </form>';
+                $btn = '<button onclick="modalAction(\''.url('/user/' . $user->user_id . '/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
+                $btn .= '<button onclick="modalAction(\''.url('/user/' . $user->user_id . '/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
+                $btn .= '<button onclick="modalAction(\''.url('/user/' . $user->user_id . '/delete_ajax').'\')" class="btn btn-danger btn-sm">Hapus</button> ';
+                return $btn;
             })
             ->rawColumns(['aksi'])
             ->make(true);
@@ -171,7 +175,7 @@ class UserController extends Controller
     }
 
     public function store_ajax(Request $request) {
-        // cek apakah request berupa ajax
+        
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'level_id' => 'required|integer',
@@ -180,14 +184,14 @@ class UserController extends Controller
                 'password' => 'required|min:6'
             ];
 
-            // use Illuminate\Support\Facades\Validator;
+           
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // response status, false: error/gagal, true: berhasil
+                    'status' => false, 
                     'message' => 'Validasi Gagal',
-                    'msgField' => $validator->errors(), // pesan error validasi
+                    'msgField' => $validator->errors(),
                 ]);
             }
 
@@ -198,5 +202,52 @@ class UserController extends Controller
             ]);
         }
         redirect('/');
+    }
+
+    public function edit_ajax(string $id) {
+        $user = UserModel::find($id);
+        $level = LevelModel::select('level_id', 'level_name')->get();
+
+        return view('user.edit_ajax', ['user' => $user, 'level' => $level]);
+    }
+
+    public function update_ajax(Request $request, $id) {
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'level_id' => 'required|integer',
+                'username' => 'required|max:20|unique:m_user,username,'.$id.',user_id',
+                'nama'     => 'required|max:100',
+                'password' => 'nullable|min:6|max:20'
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false, 
+                    'message' => 'Validasi gagal.',
+                    'msgField' => $validator->errors(), 
+                ]);
+            }
+
+            $check = UserModel::find($id);
+            if ($check) {
+                if (!$request->filled('password')) { 
+                    $request->request->remove('password');
+                }
+
+                $check->update($request->all());
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data berhasil diupdate'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Data tidak ditemukan'
+                ]);
+            }
+        }
+        return redirect('/');
     }
 }
