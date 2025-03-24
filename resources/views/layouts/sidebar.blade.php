@@ -79,6 +79,30 @@
                 </a>
             </li>
         </ul>
+        @auth
+            <button id="btn-logout" type="button" class="btn btn-danger btn-sm">Logout</button>
+        @endauth
     </nav>
     <!-- /.sidebar-menu -->
 </div>
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('#btn-logout').click(function() {
+                console.log('logout');
+                $.ajax({
+                    url: "{{ url('logout') }}",
+                    type: 'GET',
+                    success: function(response) {
+                        console.log(response);
+                        window.location.href = '{{ url('login') }}';
+                    },
+                    error: function(xhr) {
+                        console.log(xhr);
+                    }
+                })
+            });
+        });
+    </script>
+@endpush
