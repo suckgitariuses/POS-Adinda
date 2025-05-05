@@ -14,13 +14,38 @@ use Illuminate\Support\Facades\Route;
 
 Route::pattern('id','[0-9]+'); // artinya ketika ada parameter {id}, maka harus berupa angka
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/postlogin', [AuthController::class, 'postlogin']);
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'postlogin']);
+Route::post('login', [AuthController::class, 'postlogin']);
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('register', [AuthController::class, 'postregister']);
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::middleware(['auth'])->group(function() { // artinya semua route di dalam group ini harus login dulu 
     Route::get('/', [WelcomeController::class, 'index']);
 
+    // artinya semua route di dalam group ini harus punya role ADM (Administrator)
+    Route::middleware(['authorize:ADM'])->group(function () {
+        Route::prefix('level')->group(function () {
+            Route::get('/', [LevelController::class, 'index']);
+            Route::post('/list', [LevelController::class, 'list']);
+            Route::get('/create', [LevelController::class, 'create']);
+            Route::post('/', [LevelController::class, 'store']);
+            Route::get('/create_ajax', [LevelController::class, 'create_ajax']); // Menampilkan halaman form tambah user Ajax
+            Route::post('/ajax', [LevelController::class, 'store_ajax']);         // Menyimpan data user baru Ajax
+            Route::get('/{id}/edit', [LevelController::class, 'edit']);
+            Route::put('/{id}', [LevelController::class, 'update']);
+            Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']);  // Menampilkan halaman form edit user Ajax
+            Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']);     // Menyimpan perubahan data user Ajax
+            Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
+            Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); // Untuk hapus data user Ajax
+            Route::delete('/{id}', [LevelController::class, 'destroy']);
+        });      
+    });
+    
+
+    // ADM & MNG: User, Kategori, Supplier, Barang 
+    Route::middleware(['authorize:ADM,MNG'])->group(function() {
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', [UserController::class, 'index']); // Menampilkan halaman awal user
         Route::post('/list', [UserController::class, 'list']); // Menampilkan data user dalam bentuk JSON untuk DataTables
@@ -110,4 +135,6 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
         Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
         Route::delete('/{id}', [BarangController::class, 'destroy']); // Menghapus data level
     });
+
+});
 });

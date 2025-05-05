@@ -14,7 +14,7 @@ class UserModel extends Authenticatable
     protected $table = 'm_user';
     protected $primaryKey = 'user_id';
 
-    protected $fillable = ['level_id', 'usernama', 'nama', 'password', 'created_at', 'updated_at'];
+    protected $fillable = ['level_id', 'username', 'nama', 'password', 'created_at', 'updated_at'];
 
     protected $hidden = ['password']; // jangan ditampilkan saat select 
 
@@ -26,5 +26,26 @@ class UserModel extends Authenticatable
     public function level():BelongsTo
     {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id'); //
+    }
+
+    /**
+     * Mendapatkan nama role 
+     */
+    public function getRoleName(): string
+    {
+        return $this->level->level_nama;
+    }
+
+    /**
+     * Cek apakah user memiliki role tertentu 
+     */
+    public function hasRole($role): bool
+    {
+        return $this->level->level_kode == $role;
+    }
+
+    public function getRole()
+    {
+        return $this -> level ->level_kode;
     }
 }
