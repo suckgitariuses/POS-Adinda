@@ -127,8 +127,6 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::post('/', [BarangController::class, 'store']);
             Route::get('/create_ajax', [BarangController::class, 'create_ajax']); // Menampilkan halaman form tambah user Ajax
             Route::post('/ajax', [BarangController::class, 'store_ajax']);         // Menyimpan data user baru Ajax
-            Route::get('/import', [BarangController::class, 'import']); //ajax form upload excel
-            Route::post('/import_ajax', [BarangController::class, 'import_ajax']); // ajax import excel
             Route::get('/{id}', [BarangController::class, 'show']);
             Route::get('/{id}/edit', [BarangController::class, 'edit']);
             Route::put('/{id}', [BarangController::class, 'update']);
@@ -137,6 +135,9 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
             Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // Untuk hapus data user Ajax
             Route::delete('/{id}', [BarangController::class, 'destroy']);
+            Route::get('/import', [BarangController::class, 'import']); //ajax form upload excel
+            Route::post('/import_ajax', [BarangController::class, 'import_ajax']); // ajax import excel
+            Route::get('/export_excel', [BarangController::class, 'export_excel']);
         });
     });
 });
