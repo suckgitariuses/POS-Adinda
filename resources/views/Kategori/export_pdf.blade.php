@@ -116,7 +116,7 @@
              @foreach($kategori as $b)
                  <tr>
                      <td class="text-center">{{ $loop->iteration }}</td>
-                     <td>{{ $b->kategore_kode }}</td>
+                     <td>{{ $b->kategori_kode }}</td>
                      <td>{{ $b->kategori_nama }}</td>
                  </tr>
              @endforeach

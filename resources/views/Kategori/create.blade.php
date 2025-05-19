@@ -10,10 +10,10 @@
             <form method="POST" action="{{ url('kategori') }}" class="form-horizontal">
                 @csrf
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Kategore Kode</label>
+                    <label class="col-1 control-label col-form-label">Kategori Kode</label>
                     <div class="col-11">
-                        <input type="text" class="form-control" id="kategore_kode" name="kategore_kode" value="{{ old('kategore_kode') }}" required>
-                        @error('kategore_kode')
+                        <input type="text" class="form-control" id="kategori_kode" name="kategori_kode" value="{{ old('kategori_kode') }}" required>
+                        @error('kategori_kode')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
