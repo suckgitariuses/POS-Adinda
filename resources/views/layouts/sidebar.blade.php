@@ -69,6 +69,7 @@
                 </a>
             </li>
 
+            {{-- add --}}
             <li class="nav-item mt-5">
                 <a href="#" class="nav-link text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
